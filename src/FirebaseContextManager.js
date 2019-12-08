@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-export const FirebaseContext = React.createContext([{}, () => {}]);
+import React, { useState } from 'react';
+export const AuthContext = React.createContext([{}, () => {}]);
 
-const UserContextManager = ({ children }) => {
-  const [firebase, setFirebase] = useState({ firebase: null });
+const AuthContextManager = ({ children }) => {
+  const [auth, setAuth] = useState({ auth: null });
   return (
-    <FirebaseContext.Provider value={[firebase, setFirebase]}>
+    <AuthContext.Provider value={[auth, setAuth]}>
       {children}
-    </FirebaseContext.Provider>
+    </AuthContext.Provider>
   );
 };
 
-export default UserContextManager;
+export default AuthContextManager;

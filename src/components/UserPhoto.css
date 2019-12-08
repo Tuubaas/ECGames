@@ -1,0 +1,18 @@
+.UserPhoto {
+  border-radius: 50%;
+}
+
+.UserPhoto-L {
+  height: 192px;
+  width: 192px;
+}
+
+.UserPhoto-M {
+  height: 96px;
+  width: 96px;
+}
+
+.UserPhoto-S {
+  height: 48px;
+  width: 48px;
+}
