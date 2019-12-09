@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-
+import { Route, Switch } from 'react-router-dom';
 import AuthContextManager, { AuthContext } from './FirebaseContextManager';
-
 import withFirebaseAuth from 'react-with-firebase-auth';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -35,6 +34,10 @@ function App(props) {
           <button onClick={signInWithFacebook}>Sing in with Facebook</button>
         </React.Fragment>
       )}
+      <Switch>
+        <Route path="/" render={props => <HomePage auth={props} />} />
+        <Route path="odds-em" />
+      </Switch>
     </AuthContextManager>
   );
 }
