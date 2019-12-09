@@ -1,0 +1,8 @@
+.HomeContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  background: linear-gradient(120deg, #3894d6 50%, #216494 50%);
+  /*background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);*/
+}
