@@ -5,10 +5,14 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
 
+import Firebase, { FirebaseContext } from './Firebase';
+
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <FirebaseContext.Provider value={new Firebase()}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </FirebaseContext.Provider>,
   document.getElementById('root')
 );
 

@@ -1,9 +1,8 @@
 import React from 'react';
-import Button from './Button';
-import TextParagraph from './TextParagraph';
+import { Button, TextParagraph } from '../index';
 import './HomeContent.css';
 
-const HomeContent = props => {
+const HomeContentComponent = props => {
   const { user, text, link } = props;
 
   return (
@@ -18,4 +17,4 @@ const HomeContent = props => {
   );
 };
 
-export default HomeContent;
+export default HomeContentComponent;

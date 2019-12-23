@@ -4,12 +4,19 @@ import './Button.css';
 
 const Button = props => {
   const { children, className, onClick, link } = props;
+
   return link ? (
-    <Link className={className ? className : 'Button'} onClick={onClick}>
+    <Link
+      to={link}
+      className={className ? 'Button ' + className : 'Button Button-Standard'}
+    >
       {children}
     </Link>
   ) : (
-    <div className={className ? className : 'Button'} onClick={onClick}>
+    <div
+      className={className ? 'Button ' + className : 'Button Button-Standard'}
+      onClick={onClick}
+    >
       {children}
     </div>
   );

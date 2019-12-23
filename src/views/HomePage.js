@@ -1,13 +1,11 @@
 import React from 'react';
-import PageHeaderContainer from '../containers/PageHeader.container';
-import HomeContentContainer from '../containers/HomeContent.container';
+import { PageHeader, HomeContent } from '../components';
 
 const HomePage = props => {
-  const { auth } = props;
   return (
     <React.Fragment>
-      <PageHeaderContainer auth={auth} />
-      <HomeContentContainer />
+      <PageHeader />
+      <HomeContent />
     </React.Fragment>
   );
 };

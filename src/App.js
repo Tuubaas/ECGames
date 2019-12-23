@@ -1,45 +1,34 @@
 import React, { useContext, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import AuthContextManager, { AuthContext } from './FirebaseContextManager';
-import withFirebaseAuth from 'react-with-firebase-auth';
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import firebaseConfig from './firebaseConfig';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HomePage from './views/HomePage';
-
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-const firebaseAppAuth = firebaseApp.auth();
-
-const providers = {
-  googleProvider: new firebase.auth.GoogleAuthProvider(),
-  facebookProvider: new firebase.auth.FacebookAuthProvider()
-};
+import GamePage from './views/GamePage';
 
 function App(props) {
-  const [auth, setAuth] = useContext(AuthContext);
-  useEffect(() => setAuth(props));
-
-  const { user, signOut, signInWithGoogle, signInWithFacebook } = props;
-
   return (
-    <AuthContextManager>
-      <HomePage auth={props} />
-      {user ? <p>Hello, {user.displayName}</p> : <p>PLease sign in</p>}
-      {user ? (
-        <button onClick={signOut}>Sing out</button>
-      ) : (
-        <React.Fragment>
-          <button onClick={signInWithGoogle}>Sign in with Google</button>
-          <button onClick={signInWithFacebook}>Sing in with Facebook</button>
-        </React.Fragment>
-      )}
+    <Router>
       <Switch>
-        <Route path="/" render={props => <HomePage auth={props} />} />
-        <Route path="odds-em" />
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route path="/odds-em">
+          <GamePage />
+        </Route>
+        <Route path="/odds-em/dashboard">
+          <GamePage />
+        </Route>
+        <Route path="/odds-em/game">
+          <GamePage />
+        </Route>
+        <Route path="/odds-em/leaderboards">
+          <GamePage />
+        </Route>
+        <Route path="/odds-em/etc">
+          {/*Change to correct tab URL*/}
+          <GamePage />
+        </Route>
       </Switch>
-    </AuthContextManager>
+    </Router>
   );
 }
 
-export default withFirebaseAuth({ providers, firebaseAppAuth })(App);
+export default App;

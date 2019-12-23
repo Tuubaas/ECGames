@@ -1,9 +1,8 @@
 import React from 'react';
-import Button from './Button';
-import UserPhoto from './UserPhoto';
+import { Button, UserPhoto } from '../index';
 import './PageHeader.css';
 
-const PageHeader = props => {
+const PageHeaderComponent = props => {
   const { buttonText, imageAlt, imageSrc, logo, name, userAction } = props;
 
   return (
@@ -21,4 +20,4 @@ const PageHeader = props => {
   );
 };
 
-export default PageHeader;
+export default PageHeaderComponent;
