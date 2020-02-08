@@ -1,26 +1,22 @@
-import React, { useContext } from 'react';
+import React /*, { useContext }*/ from 'react';
 import PageHeaderComponent from './PageHeader.component';
 //import { ReactComponent as OddsEmLogo } from '../OddsEM-grey.svg';
-import { withFirebase } from '../../Firebase';
-
 const PageHeader = ({ firebase }) => {
-  //const [auth, setAuth] = useContext(AuthContext);
-  const { user, singOut, signInWithGoogle, signInWithFacebook } = firebase.auth
-    ? firebase.auth
-    : {};
+  const { user, signOut, signInWithGoogle, signInWithFacebook } = firebase;
 
+  //console.log(firebase);
   const getUserModuleInfo = () => {
     return user
       ? {
           name: user.displayName,
-          userAction: singOut,
+          userAction: signOut,
           imageSrc: user.photoURL,
           imageAlt: 'Profile',
           buttonText: 'Sign out'
         }
       : {
           name: '',
-          userAction: signInWithFacebook,
+          userAction: signInWithGoogle,
           imageSrc: '',
           imageAlt: '',
           buttonText: 'Sign in'
@@ -30,4 +26,4 @@ const PageHeader = ({ firebase }) => {
   return <PageHeaderComponent {...getUserModuleInfo()} logo={''} />;
 };
 
-export default withFirebase(PageHeader);
+export default PageHeader;

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, UserPhoto } from '../index';
 import './PageHeader.css';
 
 const PageHeaderComponent = props => {
   const { buttonText, imageAlt, imageSrc, logo, name, userAction } = props;
+  console.log(process.env.REACT_APP_API_KEY);
 
   return (
     <div className="PageHeader">
@@ -14,7 +15,7 @@ const PageHeaderComponent = props => {
       <div className="PageHeader-User">
         <UserPhoto src={imageSrc} alt={imageAlt} className="UserPhoto-M" />
         <span className="PageHeader-userText">{name ? name : 'Sign in'}</span>
-        <Button onClick={userAction}>{buttonText}</Button>
+        <Button onClick={() => userAction()}>{buttonText}</Button>
       </div>
     </div>
   );

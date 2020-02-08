@@ -5,14 +5,13 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
 
-import Firebase, { FirebaseContext } from './Firebase';
+import * as dotenv from 'dotenv';
+dotenv.config({ path: './.env' });
 
 ReactDOM.render(
-  <FirebaseContext.Provider value={new Firebase()}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </FirebaseContext.Provider>,
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

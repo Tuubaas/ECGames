@@ -7,11 +7,7 @@ const TabBarComponent = props => {
   return (
     <div className="TabBar">
       {items.map((item, i) => (
-        <Link
-          key={i}
-          className="TabBar-Tab"
-          to={`/odds-em/${item.text.toLowerCase()}`}
-        >
+        <Link key={i} className="TabBar-Tab" to={`/${item.text.toLowerCase()}`}>
           {item.text}
         </Link>
       ))}
