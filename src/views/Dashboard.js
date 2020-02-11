@@ -2,10 +2,6 @@ import React from 'react';
 import TabBar from '../components/TabBar';
 
 const Dashboard = props => {
-  /*if (!auth.loading && !auth.user) {
-    return <Redirect to="/" />;
-  }*/
-
   /**
    * Pseudo code:
    * fetch todays bets as a list of object preferrably using useEffect
@@ -13,7 +9,7 @@ const Dashboard = props => {
 
   return (
     <React.Fragment>
-      <TabBar list={['Dashboard', 'Game', 'Leaderboards', 'Etc']} />
+      <TabBar list={['Dashboard', 'Game', 'Leaderboards', 'About']} />
     </React.Fragment>
   );
 };

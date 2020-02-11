@@ -1,8 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { PageHeader, HomeContent } from './components/index';
-//import HomePage from './views/HomePage';
+import GamePage from './views/GamePage';
 import Dashboard from './views/Dashboard';
+import Leaderboard from './views/Leaderboards';
+import HowToPlay from './views/HowToPlay';
 import User from './User.firestoreTemplate';
 
 import * as app from 'firebase/app';
@@ -29,17 +31,19 @@ function App(props) {
             <HomeContent />
           </Route>
           <Route exact path="/dashboard">
-            <User />
+            <Dashboard firebase={props} />
           </Route>
           <Route exact path="/game">
-            <Dashboard />
+            <GamePage firebase={props} />
           </Route>
           <Route exact path="/leaderboards">
-            <Dashboard />
+            <Leaderboard firebase={props} />
           </Route>
-          <Route exact path="/etc">
-            {/*Change to correct tab URL*/}
-            <Dashboard />
+          <Route exact path="/about">
+            <HowToPlay firebase={props} />
+          </Route>
+          <Route exact path="/user">
+            <User />
           </Route>
         </Switch>
       </Router>
