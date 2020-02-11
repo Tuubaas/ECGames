@@ -4,7 +4,6 @@ import './PageHeader.css';
 
 const PageHeaderComponent = props => {
   const { buttonText, imageAlt, imageSrc, logo, name, userAction } = props;
-  console.log(process.env.REACT_APP_API_KEY);
 
   return (
     <div className="PageHeader">

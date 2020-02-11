@@ -2,8 +2,6 @@ import React from 'react';
 import TabBar from '../components/TabBar';
 
 const Dashboard = props => {
-  console.log(props, 'Game');
-
   /*if (!auth.loading && !auth.user) {
     return <Redirect to="/" />;
   }*/

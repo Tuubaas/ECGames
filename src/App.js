@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { PageHeader, HomeContent } from './components/index';
 //import HomePage from './views/HomePage';
 import Dashboard from './views/Dashboard';
+import User from './User.firestoreTemplate';
 
 import * as app from 'firebase/app';
 import 'firebase/auth';
@@ -27,19 +28,16 @@ function App(props) {
             {/*<HomePage />*/}
             <HomeContent />
           </Route>
-          <Route path="/">
+          <Route exact path="/dashboard">
+            <User />
+          </Route>
+          <Route exact path="/game">
             <Dashboard />
           </Route>
-          <Route path="/dashboard">
+          <Route exact path="/leaderboards">
             <Dashboard />
           </Route>
-          <Route path="/game">
-            <Dashboard />
-          </Route>
-          <Route path="/leaderboards">
-            <Dashboard />
-          </Route>
-          <Route path="/etc">
+          <Route exact path="/etc">
             {/*Change to correct tab URL*/}
             <Dashboard />
           </Route>
