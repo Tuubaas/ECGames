@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import * as app from 'firebase/app';
+import 'firebase/auth';
+import withFirebaseAuth from 'react-with-firebase-auth';
+import { ThemeProvider } from 'styled-components';
+
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { PageHeader, HomeContent } from './components/index';
+import { PageHeader, HomeContent, Menu } from './components/index';
 import GamePage from './views/GamePage';
 import Dashboard from './views/Dashboard';
 import Leaderboard from './views/Leaderboards';
 import HowToPlay from './views/HowToPlay';
 import User from './User.firestoreTemplate';
-
-import * as app from 'firebase/app';
-import 'firebase/auth';
-import withFirebaseAuth from 'react-with-firebase-auth';
 import firebaseConfig from './FirebaseConfig';
+import { GlobalStyle } from './global';
+import { theme } from './theme';
+import { useOnClickOutside } from './hooks';
 
 const firebaseApp = app.initializeApp(firebaseConfig);
 const firebaseAppAuth = firebaseApp.auth();
@@ -21,14 +25,23 @@ const providers = {
 };
 
 function App(props) {
+  const [open, setOpen] = useState(false);
+
+  const node = useRef();
+  useOnClickOutside(node, () => setOpen(false));
+
   return (
-    <React.Fragment>
-      <PageHeader firebase={props} />
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <div ref={node}>
+        <Menu open={open} setOpen={setOpen} />
+        <PageHeader firebase={props} open={open} setOpen={setOpen} />
+      </div>
       <Router>
         <Switch>
           <Route exact path="/">
             {/*<HomePage />*/}
-            <HomeContent />
+            <HomeContent firebase={props} />
           </Route>
           <Route exact path="/dashboard">
             <Dashboard firebase={props} />
@@ -47,7 +60,7 @@ function App(props) {
           </Route>
         </Switch>
       </Router>
-    </React.Fragment>
+    </ThemeProvider>
   );
 }
 

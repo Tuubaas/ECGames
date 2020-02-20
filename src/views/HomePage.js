@@ -1,11 +1,11 @@
 import React from 'react';
 import { PageHeader, HomeContent } from '../components';
 
-const HomePage = props => {
+const HomePage = ({ firebase }) => {
   return (
     <React.Fragment>
-      <PageHeader />
-      <HomeContent />
+      {/*<PageHeader />*/}
+      <HomeContent firebase={firebase} />
     </React.Fragment>
   );
 };
