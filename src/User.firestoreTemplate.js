@@ -1,12 +1,12 @@
-import React from "react";
-import firebase from "firebase";
+import React from 'react';
+import firebase from 'firebase';
 
 class User extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      fullname: ""
+      email: '',
+      fullname: ''
     };
   }
 
@@ -19,9 +19,9 @@ class User extends React.Component {
     const db = firebase.firestore();
     db.settings({ timestampsInSnapshots: true });
     const userRef = db
-      .collection("user")
+      .collection('user')
       .add({ name: this.state.fullname, mail: this.state.fullname });
-    this.setState({ fullname: "", email: "" });
+    this.setState({ fullname: '', email: '' });
   };
 
   render() {

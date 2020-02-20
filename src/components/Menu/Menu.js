@@ -2,7 +2,7 @@ import React from 'react';
 import { bool } from 'prop-types';
 import { StyledMenu } from './Menu.styled';
 
-const Menu = ({ open, setOpen }) => {
+const Menu = ({ open }) => {
   return (
     <StyledMenu open={open}>
       <a href="/">

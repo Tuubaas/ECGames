@@ -34,7 +34,7 @@ function App(props) {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <div ref={node}>
-        <Menu open={open} setOpen={setOpen} />
+        <Menu open={open} />
         <PageHeader firebase={props} open={open} setOpen={setOpen} />
       </div>
       <Router>
