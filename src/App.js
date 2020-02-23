@@ -6,11 +6,13 @@ import { ThemeProvider } from 'styled-components';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { PageHeader, HomeContent, Menu } from './components';
-import GamePage from './views/GamePage';
-import Dashboard from './views/Dashboard';
-import Leaderboard from './views/Leaderboards';
-import HowToPlay from './views/HowToPlay';
-import AdminPage from './views/AdminPage';
+import {
+  GamePage,
+  Dashboard,
+  Leaderboard,
+  HowToPlay,
+  AdminPage
+} from './views';
 import User from './User.firestoreTemplate';
 import firebaseConfig from './FirebaseConfig';
 import { GlobalStyle } from './global';
