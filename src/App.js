@@ -5,11 +5,12 @@ import withFirebaseAuth from 'react-with-firebase-auth';
 import { ThemeProvider } from 'styled-components';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { PageHeader, HomeContent, Menu } from './components/index';
+import { PageHeader, HomeContent, Menu } from './components';
 import GamePage from './views/GamePage';
 import Dashboard from './views/Dashboard';
 import Leaderboard from './views/Leaderboards';
 import HowToPlay from './views/HowToPlay';
+import AdminPage from './views/AdminPage';
 import User from './User.firestoreTemplate';
 import firebaseConfig from './FirebaseConfig';
 import { GlobalStyle } from './global';
@@ -18,6 +19,7 @@ import { useOnClickOutside } from './hooks';
 
 const firebaseApp = app.initializeApp(firebaseConfig);
 const firebaseAppAuth = firebaseApp.auth();
+const firestore = app.firestore();
 
 const providers = {
   googleProvider: new app.auth.GoogleAuthProvider(),
@@ -48,7 +50,7 @@ function App(props) {
             <Dashboard firebase={props} />
           </Route>
           <Route exact path="/game">
-            <GamePage firebase={props} />
+            <GamePage firebase={props} firestore={firestore} />
           </Route>
           <Route exact path="/leaderboards">
             <Leaderboard firebase={props} />
@@ -58,6 +60,9 @@ function App(props) {
           </Route>
           <Route exact path="/user">
             <User />
+          </Route>
+          <Route exact path="/admin">
+            <AdminPage />
           </Route>
         </Switch>
       </Router>
