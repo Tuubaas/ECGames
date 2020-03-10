@@ -23,7 +23,6 @@ const Leaderboard = ({ firebase, firestore }) => {
     firestore.collection('Leagues').get()
       .then(snapshot => {
         snapshot.forEach(doc => {
-          console.log(doc.id, '=>', doc.data())
           leagueList.push({ name: doc.id, data: doc.data() })
 
         })
@@ -34,25 +33,21 @@ const Leaderboard = ({ firebase, firestore }) => {
   }
   const leagueItems = () => {
     getLeagues()
-    console.log(leagues)
-    leagues.map(league =>
-      console.log(league))
+    const listOfStuff = leagues.map((object, index) =>
+      <li>{object.name} with Owner: {object.data.Owner} and participants: {object.data.Users}</li>
+
+    );
+    return (
+      <ul>{listOfStuff}</ul>
+    )
   }
 
 
   return <div>
-    <Card >
-      <Card.Header>
-        <Card.Body>
-          <Card.Title>League</Card.Title>
-          <Card.Text>
 
-          </Card.Text>
-          <Button variant='primary' onClick={() => leagueItems()}>Check it out</Button>
-        </Card.Body>
-      </Card.Header>
-    </Card>
-  </div>;
+    {leagueItems()}
+
+  </div >;
 };
 
 export default Leaderboard;
