@@ -53,7 +53,7 @@ function App(props) {
             <GamePage firebase={props} firestore={firestore} />
           </Route>
           <Route exact path="/leaderboards">
-            <Leaderboards firebase={props} />
+            <Leaderboards firebase={props} firestore={firestore} />
           </Route>
           <Route exact path="/about">
             <HowToPlay firebase={props} />
