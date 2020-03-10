@@ -5,11 +5,4 @@ import HomePage from './HomePage';
 import HowToPlay from './HowToPlay';
 import Leaderboards from './Leaderboards';
 
-export default {
-  AdminPage,
-  Dashboard,
-  GamePage,
-  HomePage,
-  HowToPlay,
-  Leaderboards
-};
+export { AdminPage, Dashboard, GamePage, HomePage, HowToPlay, Leaderboards };

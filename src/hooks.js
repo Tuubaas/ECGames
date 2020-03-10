@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 
 export const useOnClickOutside = (ref, handler) => {
-  console.log('in handler');
-
   useEffect(() => {
     const listner = event => {
       if (!ref.current || ref.current.contains(event.target)) {

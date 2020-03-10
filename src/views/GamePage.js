@@ -21,8 +21,12 @@ const GamePage = ({ firebase, firestore }) => {
             const data = doc.data();
             console.log(data);
           })
-      : console.log('Not logged in');
+      : test();
   });
+
+  const test = () => {
+    let x = 0;
+  };
 
   const addData = () => {
     const data = { '1': 1, '2': 'Granen' };
@@ -38,17 +42,12 @@ const GamePage = ({ firebase, firestore }) => {
   const node = useRef();
   useOnClickOutside(node, () => setShow(false));
 
-  const test = () => {
-    console.log('set to: ' + !show);
-    setShow(!show);
-  };
-
   return (
     <div>
       <div ref={node}>
-        <div style={{ height: '10px' }} onClick={() => test()}></div>
+        <div style={{ height: '10px' }} onClick={() => setShow(!show)}></div>
         <ActionWrapper show={show}>
-          <DatePicker />
+          <DatePicker setDate={setDate} />
         </ActionWrapper>
       </div>
       <Bet1X2 bet={'Sverige - Danmark'} options={[1.85, 4.0, 9.0]} />

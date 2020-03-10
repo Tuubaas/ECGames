@@ -9,7 +9,7 @@ import { PageHeader, HomeContent, Menu } from './components';
 import {
   GamePage,
   Dashboard,
-  Leaderboard,
+  Leaderboards,
   HowToPlay,
   AdminPage
 } from './views';
@@ -42,10 +42,8 @@ function App(props) {
           <Menu open={open} setOpen={setOpen} />
           <PageHeader firebase={props} open={open} setOpen={setOpen} />
         </div>
-
         <Switch>
           <Route exact path="/">
-            {/*<HomePage />*/}
             <HomeContent firebase={props} />
           </Route>
           <Route exact path="/dashboard">
@@ -55,7 +53,7 @@ function App(props) {
             <GamePage firebase={props} firestore={firestore} />
           </Route>
           <Route exact path="/leaderboards">
-            <Leaderboard firebase={props} />
+            <Leaderboards firebase={props} />
           </Route>
           <Route exact path="/about">
             <HowToPlay firebase={props} />
