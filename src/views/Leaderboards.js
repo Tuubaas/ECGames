@@ -3,6 +3,8 @@ import { firestore } from 'firebase';
 import { Card, Button } from "react-bootstrap";
 
 const Leaderboard = ({ firebase, firestore }) => {
+
+
   let refreshed = true
   const [leagues, setLeagues] = useState([])
   let doc = firestore.collection('Leagues').doc('Premier League')
@@ -22,7 +24,7 @@ const Leaderboard = ({ firebase, firestore }) => {
       .then(snapshot => {
         snapshot.forEach(doc => {
           console.log(doc.id, '=>', doc.data())
-          leagueList.push(doc.id)
+          leagueList.push({ name: doc.id, data: doc.data() })
 
         })
         setLeagues(leagueList)
