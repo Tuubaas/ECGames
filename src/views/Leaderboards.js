@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { firestore } from 'firebase';
 import { Card, Button } from "react-bootstrap";
+import { Formik, Form, FieldArray } from 'formik';
 
 const Leaderboard = ({ firebase, firestore }) => {
+
+  const [showForm, setShowForm] = useState(false)
 
 
   let refreshed = true
@@ -18,6 +21,31 @@ const Leaderboard = ({ firebase, firestore }) => {
       refreshed = false
     }
   });
+
+  const addToDb = () => {
+    console.log('added to database =)')
+  }
+  const addLeague = () => {
+    return (
+      <div>
+        <h1>Anywhere in your app!</h1>
+        <Formik initialValues={{ league: '' }} onSubmit={() => { addToDb() }}>
+          {({ values, touched, handleChange, handleBlur }) => (
+            <Form noValidate autoComplete="off">
+              <FieldArray name="bets">
+                {({ push, remove }) => (
+                  <div>
+
+                  </div>
+                )}
+              </FieldArray>
+            </Form>
+          )}
+        </Formik>
+      </div>
+    )
+  }
+
   const getLeagues = () => {
     let leagueList = []
     firestore.collection('Leagues').get()
@@ -46,7 +74,8 @@ const Leaderboard = ({ firebase, firestore }) => {
   return <div>
 
     {leagueItems()}
-
+    <Button variant='primary' onClick={() => setShowForm(!showForm)}>{showForm ? 'Close form' : 'Add league'}</Button>
+    {showForm ? addLeague() : null}
   </div >;
 };
 
