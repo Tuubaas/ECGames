@@ -80,6 +80,7 @@ const Leaderboard = ({ firebase, firestore }) => {
 
   }
 
+  // TODO: Make a confirmation modal that says "Are you sure, before deleting"
   const deleteLeague = (object) => {
     let user = firebase.user.displayName
     console.log(user, ' and ', object.data.Owner)
@@ -93,7 +94,7 @@ const Leaderboard = ({ firebase, firestore }) => {
     getLeagues()
     const listOfStuff = leagues.map((object, index) =>
       <React.Fragment>
-        <li>{object.name} with Owner: {object.data.Owner} and participants: {object.data.Users}</li>
+        <li>{object.name} with Owner: {object.data.Owner} and participants: {object.data.users}</li>
         <Button onClick={() => deleteLeague(object)}>Delete</Button>
       </React.Fragment>
     );
