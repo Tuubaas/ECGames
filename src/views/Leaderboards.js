@@ -6,7 +6,7 @@ import { Formik, Form, FieldArray } from 'formik';
 const Leaderboard = ({ firebase, firestore }) => {
 
   const [showForm, setShowForm] = useState(false)
-
+  //const [leagueName, setLeagueName] = useState('')
 
   let refreshed = true
   const [leagues, setLeagues] = useState([])
@@ -22,23 +22,32 @@ const Leaderboard = ({ firebase, firestore }) => {
     }
   });
 
-  const addToDb = () => {
-    console.log('added to database =)')
+
+  // const handleChange = (e) => {
+  //   setLeagueName(e.target.value)
+  // }
+
+  const addToDb = (values) => {
+    console.log('You added ', values.leagueName)
   }
+
+
+
   const addLeague = () => {
     return (
       <div>
         <h1>Anywhere in your app!</h1>
-        <Formik initialValues={{ league: '' }} onSubmit={() => { addToDb() }}>
+        <Formik initialValues={{ leagueName: ' ' }} onSubmit={(values) => { addToDb(values) }}>
           {({ values, touched, handleChange, handleBlur }) => (
             <Form noValidate autoComplete="off">
-              <FieldArray name="bets">
-                {({ push, remove }) => (
-                  <div>
-
-                  </div>
-                )}
-              </FieldArray>
+              <label>Name of the league: </label>
+              <input
+                name='leagueName'
+                type='text'
+                onChange={handleChange}
+                value={values.leagueName}
+              />
+              <button type='submit'>Submit league</button>
             </Form>
           )}
         </Formik>
