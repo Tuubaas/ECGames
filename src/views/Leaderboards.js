@@ -8,6 +8,7 @@ const Leaderboard = ({ firebase, firestore }) => {
   const [showForm, setShowForm] = useState(false)
   //const [leagueName, setLeagueName] = useState('')
 
+  const LEAGUES = 'Leagues'
   let refreshed = true
   const [leagues, setLeagues] = useState([])
   let doc = firestore.collection('Leagues').doc('Premier League')
@@ -29,6 +30,16 @@ const Leaderboard = ({ firebase, firestore }) => {
 
   const addToDb = (values) => {
     console.log('You added ', values.leagueName)
+    let user = firebase.user.displayName
+    // TODO: User should be their ID
+
+    let data = {
+      Owner: user,
+      users: [user]
+    }
+    let setDoc = firestore.collection('Leagues').doc(values.leagueName).set(data)
+
+
   }
 
 
@@ -68,11 +79,23 @@ const Leaderboard = ({ firebase, firestore }) => {
       )
 
   }
+
+  const deleteLeague = (object) => {
+    let user = firebase.user.displayName
+    console.log(user, ' and ', object.data.Owner)
+    if (object.data.Owner === user) {
+      console.log('Deleted')
+      firestore.collection(LEAGUES).doc(object.name).delete()
+    }
+  }
+
   const leagueItems = () => {
     getLeagues()
     const listOfStuff = leagues.map((object, index) =>
-      <li>{object.name} with Owner: {object.data.Owner} and participants: {object.data.Users}</li>
-
+      <React.Fragment>
+        <li>{object.name} with Owner: {object.data.Owner} and participants: {object.data.Users}</li>
+        <Button onClick={() => deleteLeague(object)}>Delete</Button>
+      </React.Fragment>
     );
     return (
       <ul>{listOfStuff}</ul>
