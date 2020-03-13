@@ -15,9 +15,7 @@ const Leaderboard = ({ firebase, firestore }) => {
     if (refreshed) {
       getLeagues()
       setRefreshed(false)
-
     }
-
   });
 
 
@@ -59,7 +57,6 @@ const Leaderboard = ({ firebase, firestore }) => {
       .then(snapshot => {
         snapshot.forEach(doc => {
           leagueList.push({ name: doc.id, data: doc.data() })
-
         })
         setLeagues(leagueList)
       }
@@ -70,9 +67,7 @@ const Leaderboard = ({ firebase, firestore }) => {
   // TODO: Make a confirmation modal that says "Are you sure, before deleting"
   const deleteLeague = (object) => {
     let user = firebase.user.displayName
-    console.log(user, ' and ', object.data.Owner)
     if (object.data.Owner === user) {
-      console.log('Deleted')
       firestore.collection(LEAGUES).doc(object.name).delete()
       setRefreshed(true)
     }
