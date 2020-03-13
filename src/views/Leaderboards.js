@@ -35,7 +35,6 @@ const Leaderboard = ({ firebase, firestore }) => {
   const addLeague = () => {
     return (
       <div>
-        <h1>Anywhere in your app!</h1>
         <Formik initialValues={{ leagueName: ' ' }} onSubmit={(values) => { addToDb(values) }}>
           {({ values, touched, handleChange, handleBlur }) => (
             <Form noValidate autoComplete="off">
