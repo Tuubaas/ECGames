@@ -18,13 +18,14 @@ const Leaderboard = ({ firebase, firestore }) => {
     }
   });
 
-
   const addToDb = (values) => {
     let user = firebase.user.displayName
+    let users = values.users.split(',')
+    users.push(user)
     // TODO: User should be their ID
     let data = {
       Owner: user,
-      users: [user]
+      users: users
     }
     firestore.collection(LEAGUES).doc(values.leagueName).set(data)
     setRefreshed(true)
@@ -33,7 +34,7 @@ const Leaderboard = ({ firebase, firestore }) => {
   const addLeague = () => {
     return (
       <div>
-        <Formik initialValues={{ leagueName: ' ' }} onSubmit={(values) => { addToDb(values) }}>
+        <Formik initialValues={{ leagueName: ' ', users: [] }} onSubmit={(values) => { addToDb(values) }}>
           {({ values, touched, handleChange, handleBlur }) => (
             <Form noValidate autoComplete="off">
               <label>Name of the league: </label>
@@ -42,6 +43,13 @@ const Leaderboard = ({ firebase, firestore }) => {
                 type='text'
                 onChange={handleChange}
                 value={values.leagueName}
+              />
+              <label>Users</label>
+              <input
+                name='users'
+                type='text'
+                onChange={handleChange}
+                value={values.users}
               />
               <button type='submit'>Submit league</button>
             </Form>
