@@ -1,38 +1,92 @@
 import React from 'react';
-import { MultiChoiceItem } from '../index';
+import { Button, MultiChoiceItem } from '../index';
+import { Formik, Form, FieldArray } from 'formik';
+import { StyledCreatorMultiChoice } from './CreatorMultiChoice.styled';
 
-const CreatorMultiChoice = ({ choices, setChoices }) => {
-  const add = i => {
-    choices.splice(i, 0, '');
-    setChoices(choices);
-  };
-
-  const remove = i => {
-    choices.splice(i, 1);
-    setChoices(choices);
-  };
-
-  const update = (i, value) => {
-    choices[i] = value;
-    setChoices(choices);
-  };
-
+const CreatorMultiChoice = ({ bet, index, handleChange, handleBlur }) => {
   return (
-    <div>
-      {choices.length > 0 ? (
-        choices.map((choice, i) => (
-          <MultiChoiceItem
-            add={add}
-            remove={remove}
-            update={update}
-            choice={choice}
-            index={i}
-          />
-        ))
-      ) : (
-        <div className="test"></div>
-      )}
-    </div>
+    <StyledCreatorMultiChoice>
+      <label>Bet: </label>
+      <input
+        type="text"
+        name={`bets[${index}].text`}
+        value={bet.text}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
+      <div>
+        <input
+          type="text"
+          name={`bets[${index}].choices[${0}].bet`}
+          value={bet.choices[0].bet}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name={`bets[${index}].choices[${0}].opt`}
+          value={bet.choices[0].opt}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name={`bets[${index}].choices[${1}].bet`}
+          value={bet.choices[1].bet}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name={`bets[${index}].choices[${1}].opt`}
+          value={bet.choices[1].opt}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name={`bets[${index}].choices[${2}].bet`}
+          value={bet.choices[2].bet}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name={`bets[${index}].choices[${2}].opt`}
+          value={bet.choices[2].opt}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name={`bets[${index}].choices[${3}].bet`}
+          value={bet.choices[3].bet}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name={`bets[${index}].choices[${3}].opt`}
+          value={bet.choices[3].opt}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name={`bets[${index}].choices[${4}].bet`}
+          value={bet.choices[4].bet}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name={`bets[${index}].choices[${4}].opt`}
+          value={bet.choices[4].opt}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+      </div>
+    </StyledCreatorMultiChoice>
   );
 };
 

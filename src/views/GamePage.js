@@ -16,7 +16,7 @@ const GamePage = ({ firebase, firestore }) => {
       ? firestore
           .collection(firebase.user.uid)
           .doc(date)
-          .get()
+          .get('Syyn7ZG0QZAhzcvihDTE')
           .then(doc => {
             const data = doc.data();
             console.log(data);

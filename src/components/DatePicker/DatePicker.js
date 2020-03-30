@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { StyledDatePicker } from './DatePicker.styled';
 
-const DatePicker = ({ setDate }) => {
+const DatePicker = ({ setDate, setLoading }) => {
   const week = [0, 1, 2, 3, 4, 5, 6].map(i => {
     return moment()
       .add(i, 'days')
@@ -13,7 +13,13 @@ const DatePicker = ({ setDate }) => {
     <StyledDatePicker>
       {week.map((date, i) => {
         return (
-          <div key={i} onClick={() => setDate(date)}>
+          <div
+            key={i}
+            onClick={() => {
+              setDate(date);
+              setLoading(true);
+            }}
+          >
             {date}
           </div>
         );

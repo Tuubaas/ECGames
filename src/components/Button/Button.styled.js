@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const StyledButton = styled.div`
+export const StyledButton = styled.button`
   :hover {
     color: blue;
     border: 1px solid blue;

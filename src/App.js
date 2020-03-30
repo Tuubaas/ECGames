@@ -62,7 +62,7 @@ function App(props) {
             <User />
           </Route>
           <Route exact path="/admin">
-            <AdminPage />
+            <AdminPage firestore={firestore} firebase={props} />
           </Route>
         </Switch>
       </Router>

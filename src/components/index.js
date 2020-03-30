@@ -1,5 +1,6 @@
 import ActionWrapper from './ActionWrapper';
 import Bet1X2 from './Bet1X2';
+import BetCreator from './BetCreator';
 import BetMultiChoice from './BetMultiChoice';
 import Burger from './Burger';
 import Button from './Button';
@@ -15,6 +16,7 @@ import UserPhoto from './UserPhoto';
 export {
   ActionWrapper,
   Bet1X2,
+  BetCreator,
   BetMultiChoice,
   Burger,
   Button,

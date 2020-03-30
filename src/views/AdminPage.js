@@ -1,45 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import { Formik, Form, FieldArray } from 'formik';
-import { DatePicker, CreatorMultiChoice } from '../components';
+import { BetCreator, DatePicker } from '../components';
 
-const AdminPage = () => {
+const AdminPage = ({ firestore, firebase }) => {
   const [date, setDate] = useState(moment().format('DD-MM-YYYY'));
-  const [bets, setBets] = useState([]);
+  const [bets, setBets] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (firebase.user && loading) {
+      firestore
+        .collection('users')
+        .doc(firebase.user.uid)
+        .collection('Bets')
+        .doc(date)
+        .get()
+        .then(doc => {
+          const data = doc.data();
+          if (data) {
+            setBets(data);
+          } else {
+            setBets({});
+          }
+          setLoading(false);
+        });
+    }
+  }, [firebase, firestore, date, loading]);
+
+  const submitToDB = values => {
+    console.log(values);
+
+    firestore
+      .collection('users')
+      .doc(firebase.user.uid)
+      .collection('Bets')
+      .doc(date)
+      .set(values);
+  };
 
   return (
     <div>
-      {/*<DatePicker setDate={setDate} />*/}
-      <Formik initialValues={{ bets: bets }} onSubmit={() => {}}>
-        {({ values, touched, handleChange, handleBlur }) => (
-          <Form noValidate autoComplete="off">
-            <FieldArray name="bets">
-              {({ push, remove }) => (
-                <div>
-                  {values.bets.map(bet => {
-                    return bet.type === 'multi' ? (
-                      <div className="multi" />
-                    ) : (
-                      <div className="1X2" />
-                    );
-                  })}
-                </div>
-              )}
-            </FieldArray>
-          </Form>
-        )}
-      </Formik>
-      {bets.length > 0 ? (
-        bets.map(bet => {
-          return bet.type === 'multi' ? (
-            <CreatorMultiChoice choices={bet.choices} text={bet.text} />
-          ) : (
-            <div className="1X2" />
-          );
-        })
-      ) : (
-        <div className="NoBet" />
-      )}
+      <DatePicker setDate={setDate} setLoading={setLoading} />
+      <BetCreator bets={bets} submitToDB={submitToDB} />
     </div>
   );
 };

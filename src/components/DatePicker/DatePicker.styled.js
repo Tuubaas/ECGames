@@ -3,13 +3,16 @@ import styled from 'styled-components';
 export const StyledDatePicker = styled.div`
   display: flex;
   flex-direction: column;
-  height: 500px;
-  width: 100%;
-  background-color: white;
 
   div {
-    height: 100%;
+    height: fit-content;
+    width: 100px;
     border: 1px solid black;
+    background-color: white;
     color: black;
+  }
+
+  div:hover {
+    background-color: grey;
   }
 `;
