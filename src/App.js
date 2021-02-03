@@ -5,11 +5,14 @@ import withFirebaseAuth from 'react-with-firebase-auth';
 import { ThemeProvider } from 'styled-components';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { PageHeader, HomeContent, Menu } from './components/index';
-import GamePage from './views/GamePage';
-import Dashboard from './views/Dashboard';
-import Leaderboard from './views/Leaderboards';
-import HowToPlay from './views/HowToPlay';
+import { PageHeader, HomeContent, Menu } from './components';
+import {
+  GamePage,
+  Dashboard,
+  Leaderboards,
+  HowToPlay,
+  AdminPage
+} from './views';
 import User from './User.firestoreTemplate';
 import firebaseConfig from './FirebaseConfig';
 import { GlobalStyle } from './global';
@@ -18,6 +21,7 @@ import { useOnClickOutside } from './hooks';
 
 const firebaseApp = app.initializeApp(firebaseConfig);
 const firebaseAppAuth = firebaseApp.auth();
+const firestore = app.firestore();
 
 const providers = {
   googleProvider: new app.auth.GoogleAuthProvider(),
@@ -33,30 +37,32 @@ function App(props) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <div ref={node}>
-        <Menu open={open} />
-        <PageHeader firebase={props} open={open} setOpen={setOpen} />
-      </div>
       <Router>
+        <div ref={node}>
+          <Menu open={open} setOpen={setOpen} />
+          <PageHeader firebase={props} open={open} setOpen={setOpen} />
+        </div>
         <Switch>
           <Route exact path="/">
-            {/*<HomePage />*/}
             <HomeContent firebase={props} />
           </Route>
           <Route exact path="/dashboard">
             <Dashboard firebase={props} />
           </Route>
           <Route exact path="/game">
-            <GamePage firebase={props} />
+            <GamePage firebase={props} firestore={firestore} />
           </Route>
           <Route exact path="/leaderboards">
-            <Leaderboard firebase={props} />
+            <Leaderboards firebase={props} firestore={firestore} />
           </Route>
           <Route exact path="/about">
             <HowToPlay firebase={props} />
           </Route>
           <Route exact path="/user">
             <User />
+          </Route>
+          <Route exact path="/admin">
+            <AdminPage />
           </Route>
         </Switch>
       </Router>
