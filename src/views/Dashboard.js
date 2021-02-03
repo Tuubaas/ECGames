@@ -1,28 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import {DashboardContent, DashboardLeague} from '../components';
 
-const Dashboard = props => {
+const Dashboard = ({firebase}) => {
 
   const [bio, setBio] = useState(null);
-  const [loadingBio, setLoadingBio] = useState(true);
 
   const [leagueInfo, setLeagueInfo] = useState([]);
-  const [loadingLeague, setLoadingLeague] = useState(true);
 
   const [betsInfo, setBetsInfo] = useState(null);
-  const [loadingBets, setLoadingBets] = useState(null);
 
   useEffect(() => {
-    if(props.firebase.user){
-      fetch('http://127.0.0.1:5000/user/' + props.firebase.user.uid, {method: 'GET'})
+    if(firebase.user){
+      fetch('http://127.0.0.1:5000/user/' + firebase.user.uid, {method: 'GET'})
       .then(res =>  res.json())
       .then(response => {
-        if(loadingBio){
-          setBio(response);
-          setLoadingBio(false);
-        }
+        setBio(response);
       });
     }
+  }, [firebase.user])
+
+  useEffect(() => {
     if(bio){
       let tmp = bio.leagues.map(league => {
         return new Promise((resolve, reject) => {
@@ -34,13 +31,13 @@ const Dashboard = props => {
 
       Promise.all(tmp)
       .then(data => {
-        if (loadingLeague) {
-          setLeagueInfo(data);
-          setLoadingLeague(false);
-        }
+        setLeagueInfo(data);
       })
     }
+  }, [bio])
 
+  useEffect(() => {
+    // For fetching bets
   })
   /**
    * Pseudo code:
@@ -48,7 +45,7 @@ const Dashboard = props => {
    */
 
   return (<div>
-    <DashboardContent firebase={props.firebase} bio={bio} leagues={leagueInfo} />
+    <DashboardContent firebase={firebase} bio={bio} leagues={leagueInfo} />
   </div>);
 };
 
