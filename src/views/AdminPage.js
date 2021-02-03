@@ -5,43 +5,30 @@ import { BetCreator, DatePicker } from '../components';
 const AdminPage = ({ firestore, firebase }) => {
   const [date, setDate] = useState(moment().format('DD-MM-YYYY'));
   const [bets, setBets] = useState({});
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (firebase.user && loading) {
-      firestore
-        .collection('users')
-        .doc(firebase.user.uid)
-        .collection('Bets')
-        .doc(date)
-        .get()
-        .then(doc => {
-          const data = doc.data();
-          if (data) {
-            setBets(data);
-          } else {
-            setBets({});
-          }
-          setLoading(false);
-        });
+    if(firebase.user){
+      fetch('http://127.0.0.1:5000/bets/' + date, {method: 'GET'})
+      .then(res => res.json())
+      .then(response => {
+        setBets(response)
+      })
     }
-  }, [firebase, firestore, date, loading]);
+  }, [firebase.user, date]);
 
-  const submitToDB = values => {
+  const submitToDb = values => {
     console.log(values);
 
     firestore
-      .collection('users')
-      .doc(firebase.user.uid)
-      .collection('Bets')
+      .collection('bets')
       .doc(date)
       .set(values);
   };
 
   return (
     <div>
-      <DatePicker setDate={setDate} setLoading={setLoading} />
-      <BetCreator bets={bets} submitToDB={submitToDB} />
+      <DatePicker setDate={setDate}/>
+      <BetCreator bets={bets} submitToDb={submitToDb} />
     </div>
   );
 };

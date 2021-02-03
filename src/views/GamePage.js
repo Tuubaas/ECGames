@@ -8,35 +8,21 @@ import {
 } from '../components';
 import { useOnClickOutside } from '../hooks';
 
+
 const GamePage = ({ firebase, firestore }) => {
   const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
+  const [bets, setBets] = useState([]);
+
 
   useEffect(() => {
-    firebase.user
-      ? firestore
-          .collection(firebase.user.uid)
-          .doc(date)
-          .get('Syyn7ZG0QZAhzcvihDTE')
-          .then(doc => {
-            const data = doc.data();
-            console.log(data);
-          })
-      : test();
-  });
-
-  const test = () => {
-    let x = 0;
-  };
-
-  const addData = () => {
-    const data = { '1': 1, '2': 'Granen' };
-
-    firestore
-      .collection(firebase.user.uid)
-      .doc(date)
-      .set(data)
-      .then(console.log('data added'));
-  };
+    if(firebase.user){
+      fetch('http://127.0.0.1:5000/bets/' + date, {method: 'GET'})
+      .then(res => res.json())
+      .then(response => {
+        setBets(response)
+      })
+    }
+  }, [firebase.user, date]);
 
   const [show, setShow] = useState(false);
   const node = useRef();
