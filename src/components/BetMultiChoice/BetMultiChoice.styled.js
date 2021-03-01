@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledBetMultiChoice = styled.div`
-  width: 100%;
+  width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,8 +18,17 @@ export const StyledBetMultiChoice = styled.div`
 
     div {
       margin: 2%;
-      background-color: white;
       text-align: center;
+      cursor: pointer;
+      border: 1px solid white;
+    }
+
+    .BetMultiChoice-Button {
+      background-color: white;
+    }
+
+    .BetMultiChoice-Button-Active {
+      background-color: grey;
     }
   }
 `;

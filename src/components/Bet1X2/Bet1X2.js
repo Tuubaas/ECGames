@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyledBet1X2 } from './Bet1X2.styled';
 
-const Bet1X2 = ({ bet, options }) => {
+const Bet1X2 = ({ bet, options, id, userBets, setUserBets }) => {
+  const [active, setActive] = useState(userBets[id])
+  const keys = ['1', 'X', '2']
+
+  useEffect(() => {
+    setActive(userBets[id])
+  }, [userBets, id])
+
+  const handleClick = (key) => {
+    if(userBets[id] === key){
+      delete userBets[id]
+      setActive(null)
+    }
+    else {
+      setActive(key)
+      setUserBets({...userBets, [id]:key})
+    }
+  }
+
   return (
     <StyledBet1X2>
       <span>{bet}</span>
       <div>
-        {options.map((option, i) => (
-          <div value={option} key={i}>
-            {option}
+        {keys.map(key => {
+          return <div value={options[key]} key={key} onClick={() => handleClick(key)} className={active === key ? 'Bet1X2-Button-Active' : 'Bet1X2-Button'}>
+            {options[key]}
           </div>
-        ))}
+        })}
       </div>
     </StyledBet1X2>
   );
