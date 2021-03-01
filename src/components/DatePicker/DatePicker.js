@@ -6,7 +6,7 @@ const DatePicker = ({ setDate, setLoading }) => {
   const week = [0, 1, 2, 3, 4, 5, 6].map(i => {
     return moment()
       .add(i, 'days')
-      .format('DD-MM-YYYY');
+      .format('YYYY-MM-DD');
   });
 
   return (
@@ -16,8 +16,8 @@ const DatePicker = ({ setDate, setLoading }) => {
           <div
             key={i}
             onClick={() => {
-              setDate(date);
-              setLoading(true);
+              setDate(date)
+              setLoading(true)
             }}
           >
             {date}

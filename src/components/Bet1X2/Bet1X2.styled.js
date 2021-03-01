@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledBet1X2 = styled.div`
-  width: 300px;
+  width: 50%;
   display: flex;
   flex-direction: column;
   //align-items: center;

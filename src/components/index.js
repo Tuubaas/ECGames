@@ -19,6 +19,7 @@ import DatePicker from './DatePicker';
 // 
 import HomeContent from './HomeContent';
 import LeaderboardCard from './LeaderboardCard';
+import Loader from './Loader'
 import Menu from './Menu';
 import MultiChoiceItem from './MultiChoiceItem';
 import PageHeader from './PageHeader';
@@ -44,6 +45,7 @@ export {
 
   HomeContent,
   LeaderboardCard,
+  Loader,
   Menu,
   MultiChoiceItem,
   PageHeader,
