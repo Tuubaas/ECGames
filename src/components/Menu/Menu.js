@@ -24,7 +24,7 @@ const Menu = ({ open, setOpen }) => {
         </span>
         Place bet
       </Link>
-      <Link to="/leaderboards" onClick={() => setOpen(false)}>
+      <Link to="/leagues" onClick={() => setOpen(false)}>
         <span role="img" aria-label="contact">
           &#x1f4e9;
         </span>

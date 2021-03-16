@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {DashboardContent, DashboardLeague} from '../components';
+import {getLeague, getUser} from '../FirebaseConfig'
 
-const Dashboard = ({firebase}) => {
+const Dashboard = ({user}) => {
 
   const [bio, setBio] = useState(null);
 
@@ -9,32 +10,19 @@ const Dashboard = ({firebase}) => {
 
   const [betsInfo, setBetsInfo] = useState(null);
 
-  useEffect(() => {
-    if(firebase.user){
-      fetch('http://127.0.0.1:5000/user/' + firebase.user.uid, {method: 'GET'})
-      .then(res =>  res.json())
-      .then(response => {
-        setBio(response);
-      });
-    }
-  }, [firebase.user])
+
+
 
   useEffect(() => {
-    if(bio){
-      let tmp = bio.leagues.map(league => {
-        return new Promise((resolve, reject) => {
-          resolve(fetch('http://127.0.0.1:5000/leagues/' + league, {method: 'GET'}))
-          reject(new Error('reject'))
-      })
-      .then(res => res.json())
-      });
-
-      Promise.all(tmp)
-      .then(data => {
-        setLeagueInfo(data);
+    if(user){
+      let leaguePromises = user.leagues.map(league => (
+        getLeague(league).then(res => res.data())
+      ))
+      Promise.all(leaguePromises).then(data => {
+        setLeagueInfo(data)
       })
     }
-  }, [bio])
+  }, [user])
 
   useEffect(() => {
     // For fetching bets
@@ -43,9 +31,10 @@ const Dashboard = ({firebase}) => {
    * Pseudo code:
    * fetch todays bets as a list of object preferrably using useEffect
    */
+  console.log(leagueInfo);
 
   return (<div>
-    <DashboardContent firebase={firebase} bio={bio} leagues={leagueInfo} />
+    <DashboardContent user={user} leagues={leagueInfo} />
   </div>);
 };
 

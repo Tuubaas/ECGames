@@ -1,4 +1,8 @@
-const config = {
+import * as app from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+
+export const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
   databaseURL: process.env.REACT_APP_DATABASE_URL,
@@ -9,4 +13,122 @@ const config = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
-export default config;
+export const firebaseApp = app.initializeApp(firebaseConfig);
+export const firebaseAppAuth = firebaseApp.auth();
+const firestore = app.firestore();
+
+const COLLECTIONS = {
+  USERS: 'users',
+  LEAGUES: 'leagues',
+  BETS: 'bets'
+}
+
+/*
+ * Sign-in functions
+ */
+
+var googleProvider = new app.auth.GoogleAuthProvider();
+var facebookProvider = new app.auth.FacebookAuthProvider();
+
+export const googleSignIn = (setUser) => {
+  firebaseAppAuth.signInWithPopup(googleProvider).then((res) => {
+    var credential = res.credential;
+    var token = credential.accessToken;
+    var user = res.user;
+    setUser(user)
+  }).catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    var email = error.email;
+    var credential = error.credential;
+    console.log(errorMessage);
+  })
+}
+
+export const facebookSignIn = (setUser) => {
+  firebaseAppAuth.signInWithPopup(facebookProvider).then((res) => {
+    var credential = res.credential;
+    var token = credential.acceddToken;
+    var user = res.user;
+    setUser(user)
+  }).catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    var email = error.email;
+    var credential = error.credential;
+  })
+}
+
+
+
+/*
+ * Firestore getters
+ */
+
+export const getUsers = () => {
+  return firestore.collection(COLLECTIONS.USERS).get();
+}
+
+export const getUser = (userId) => {
+  return firestore.collection(COLLECTIONS.USERS).doc(userId).get();
+}
+
+export const getBets = (date) => {
+  return firestore.collection(COLLECTIONS.BETS).doc(date).get();
+}
+
+export const getUserbets = (userId, date) => {
+  return firestore.collection(COLLECTIONS.USERS).doc(userId).collection(COLLECTIONS.BETS).doc(date).get();
+}
+
+export const getWeekUserbets = () => {
+  return firestore.collection(COLLECTIONS.USERS).get();
+}
+
+export const getLeague = (leagueId) => {
+  return firestore.collection(COLLECTIONS.LEAGUES).doc(leagueId).get();
+}
+
+
+/*
+ * Firestore setters
+ */
+
+export const createUser = (id, name, email, photoURL) => {
+  console.log();
+  return firestore.collection(COLLECTIONS.USERS).doc(id).set({
+    id: id,
+    name: name,
+    email: email,
+    photoURL: photoURL,
+    balance: 10000,
+    leagues: []
+  })
+}
+
+export const setBets = (date, bets) => {
+  return firestore.collection(COLLECTIONS.BETS).doc(date).set({...bets})
+}
+
+export const setUbets = (userId, date, bets) => {
+  return firestore.collection(COLLECTIONS.USERS).doc(userId).collection(COLLECTIONS.BETS).doc(date).set({
+    ...bets
+  })
+}
+
+export const createLeague = (userId, leagueName) => {
+  const leagueId = createRandomId() + createRandomId()
+  firestore.collection(COLLECTIONS.USERS).doc(userId).collection(COLLECTIONS.LEAGUES).doc(leagueId).set({id:leagueId})
+  return firestore.collection(COLLECTIONS.LEAGUES).doc(leagueId).set({
+    id: leagueId,
+    name: leagueName,
+    owner: userId,
+    players: [userId]
+  })
+}
+
+const createRandomId = () => {
+  return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+}

@@ -2,8 +2,8 @@ import React from 'react';
 import { Burger } from '../index';
 import { StyledPageHeader } from './PageHeader.styled';
 
-const PageHeader = props => {
-  const { logo, open, setOpen } = props;
+const PageHeader = ({ user, open, setOpen, logo }) => {
+  //const { logo, open, setOpen } = props;
 
   return (
     <StyledPageHeader className="PageHeader">

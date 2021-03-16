@@ -6,20 +6,17 @@ import BetsCard from './BetsCard';
 import BioContent from './BioContent';
 import Burger from './Burger';
 import Button from './Button';
+// import CreatorMultiChoice from './CreatorMultiChoice';
 import DashboardBets from './DashboardBets';
 import DashboardContent from './DashboardContent';
 import DashboardLeague from './DashboardLeague';
 import DatePicker from './DatePicker';
-// 
-// 
-// 
-// import Burger from './Burger';
-// import Button from './Button';
-// import CreatorMultiChoice from './CreatorMultiChoice';
-// 
+import GlobalLeaderboard from './GlobalLeaderboard'
+import {H1, H2} from './Headers'
 import HomeContent from './HomeContent';
 import LeaderboardCard from './LeaderboardCard';
-import Loader from './Loader'
+import LeaderboardItem from './LeaderboardItem';
+import Loader from './Loader';
 import Menu from './Menu';
 import MultiChoiceItem from './MultiChoiceItem';
 import PageHeader from './PageHeader';
@@ -35,16 +32,17 @@ export {
   BioContent,
   Burger,
   Button,
+  // CreatorMultiChoice,
   DashboardBets,
   DashboardContent,
   DashboardLeague,
   DatePicker,
-
-  // CreatorMultiChoice,
-  //
-
+  GlobalLeaderboard,
+  H1, 
+  H2,
   HomeContent,
   LeaderboardCard,
+  LeaderboardItem,
   Loader,
   Menu,
   MultiChoiceItem,

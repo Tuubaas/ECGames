@@ -3,6 +3,6 @@ import Dashboard from './Dashboard';
 import GamePage from './GamePage';
 import HomePage from './HomePage';
 import HowToPlay from './HowToPlay';
-import Leaderboards from './Leaderboards';
+import LeaguesPage from './LeaguesPage';
 
-export { AdminPage, Dashboard, GamePage, HomePage, HowToPlay, Leaderboards };
+export { AdminPage, Dashboard, GamePage, HomePage, HowToPlay, LeaguesPage };

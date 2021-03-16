@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { StyledBet1X2 } from './Bet1X2.styled';
 
 const Bet1X2 = ({ bet, options, id, userBets, setUserBets }) => {
-  const [active, setActive] = useState(userBets[id])
+  let bool = id in userBets
+  const [active, setActive] = useState(bool ? userBets[id] : '')
   const keys = ['1', 'X', '2']
 
+
   useEffect(() => {
-    setActive(userBets[id])
+    setActive((id in userBets) ? userBets[id] : '')
   }, [userBets, id])
 
   const handleClick = (key) => {
