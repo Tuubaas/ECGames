@@ -3,7 +3,7 @@ import { Button, TextParagraph, UserPhoto } from '../index';
 import { StyledHomeContent } from './HomeContent.styled';
 import {googleSignIn, facebookSignIn} from '../../FirebaseConfig'
 
-const HomeContent = ({setUser, user}) => {
+const HomeContent = ({user}) => {
 console.log();
   return (
     <StyledHomeContent>
@@ -15,10 +15,10 @@ console.log();
         </React.Fragment>
       ) : (
         <div className="HomeContent-ButtonGroup">
-          <Button signIn={true} onClick={() => googleSignIn(setUser)}>
+          <Button signIn={true} onClick={() => googleSignIn()}>
             Sign In with Google
           </Button>
-          <Button signIn={true} onClick={() => facebookSignIn(setUser)}>
+          <Button signIn={true} onClick={() => facebookSignIn()}>
             Sign In with Facebook
           </Button>
         </div>

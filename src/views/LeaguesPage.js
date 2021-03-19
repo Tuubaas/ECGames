@@ -28,11 +28,6 @@ const LeaguesPage = ({user}) => {
     if(loading){
       let tmp = userLeagues.map(league => {
         return getLeague(league).then(res => res.data())
-      //   return new Promise((resolve, reject) => {
-      //     resolve(fetch('http://127.0.0.1:5000/leagues/' + league, {method: 'GET'}))
-      //     reject(new Error('reject'))
-      // })
-      // .then(res => res.json())
       });
 
       Promise.all(tmp)

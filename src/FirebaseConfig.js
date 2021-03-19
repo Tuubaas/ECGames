@@ -1,6 +1,7 @@
 import * as app from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
+//import { setUser } from "./redux/actions";
 
 export const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -30,12 +31,13 @@ const COLLECTIONS = {
 var googleProvider = new app.auth.GoogleAuthProvider();
 var facebookProvider = new app.auth.FacebookAuthProvider();
 
-export const googleSignIn = (setUser) => {
+
+
+export const googleSignIn = () => {
   firebaseAppAuth.signInWithPopup(googleProvider).then((res) => {
     var credential = res.credential;
     var token = credential.accessToken;
     var user = res.user;
-    setUser(user)
   }).catch((error) => {
     var errorCode = error.code;
     var errorMessage = error.message;
@@ -45,12 +47,11 @@ export const googleSignIn = (setUser) => {
   })
 }
 
-export const facebookSignIn = (setUser) => {
+export const facebookSignIn = () => {
   firebaseAppAuth.signInWithPopup(facebookProvider).then((res) => {
     var credential = res.credential;
     var token = credential.acceddToken;
     var user = res.user;
-    setUser(user)
   }).catch((error) => {
     var errorCode = error.code;
     var errorMessage = error.message;
