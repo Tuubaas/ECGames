@@ -63,7 +63,7 @@ const GamePage = ({ user }) => {
         </ActionWrapper>
       </div>
       <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent:"center", marginBottom:"2%"}}>
-        {!loading ? bets.length < 1 ? <div/> : bets.bets.map((bet, i) => {
+        {!loading ? bets == null ? <div/> : bets.bets.map((bet, i) => {
           return(
             getBet(bet, i)
           )
