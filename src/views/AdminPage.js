@@ -1,37 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import { BetCreator, DatePicker } from '../components';
+import { BetCreator, DatePicker, Loader } from '../components';
 import { getBets } from '../FirebaseConfig';
+import { Redirect } from 'react-router-dom';
 
-const AdminPage = ({ firestore }) => {
-  const [date, setDate] = useState(moment().format('DD-MM-YYYY'));
+
+const AdminPage = ({ user }) => {
+  const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
   const [bets, setBets] = useState({});
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getBets(date).then(res => setBets(res.data()))
-    // if(firebase.user){
-    //   fetch('http://127.0.0.1:5000/bets/' + date, {method: 'GET'})
-    //   .then(res => res.json())
-    //   .then(response => {
-    //     setBets(response)
-    //   })
-    // }
+    getBets(date).then(res => {
+      setBets(res.data());
+      setLoading(false)
+    })
   }, [date]);
 
-  const submitToDb = values => {
-    console.log(values);
-
-    firestore
-      .collection('bets')
-      .doc(date)
-      .set(values);
-  };
-
   return (
-    <div>
-      <DatePicker setDate={setDate}/>
-      <BetCreator bets={bets} submitToDb={submitToDb} />
-    </div>
+    user ?
+      user.admin ?
+        <div>
+          <DatePicker setDate={setDate}/>
+          <BetCreator bets={bets} date={date} />
+        </div> : <Redirect to="/"/>
+      : <Loader />
   );
 };
 
