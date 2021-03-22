@@ -3,13 +3,20 @@ import { Formik, Form, FieldArray } from 'formik';
 import CreatorMultiChoice from '../CreatorMultiChoice';
 import Creator1X2 from '../Creator1X2';
 import Button from '../Button';
+import { setBets } from '../../FirebaseConfig';
 
-const BetCreator = ({ bets, submitToDB }) => {
+const BetCreator = ({ bets, date }) => {
+  var nbrBets = bets ? bets.bets.length : 0
+
+  const submitBets = (values) => {
+    setBets(date, values)
+  }
+
   return (
     <Formik
       enableReinitialize
-      initialValues={{ bets: bets.bets ? bets.bets : [] }}
-      onSubmit={values => submitToDB(values)}
+      initialValues={{bets:bets ? bets.bets : []}}
+      onSubmit={values => submitBets(values)}
     >
       {({ values, touched, handleChange, handleBlur }) => {
         return (
@@ -34,13 +41,14 @@ const BetCreator = ({ bets, submitToDB }) => {
                           handleBlur={handleBlur}
                         />
                       )}
-                      <Button onClick={() => remove(i)}>-</Button>
+                      <Button type="button" onClick={() => remove(i)}>-</Button>
                     </React.Fragment>
                   ))}
                   <Button
                     type="button"
                     onClick={() =>
                       push({
+                        betID:nbrBets++,
                         type: 'multi',
                         text: '',
                         choices: [
@@ -59,6 +67,7 @@ const BetCreator = ({ bets, submitToDB }) => {
                     type="button"
                     onClick={() =>
                       push({
+                        betID:nbrBets++,
                         type: '1X2',
                         text: '',
                         choices: { home: '', tie: '', away: '' }

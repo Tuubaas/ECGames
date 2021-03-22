@@ -48,7 +48,7 @@ function App() {
       <GlobalStyle />
       <Router>
         <div ref={node}>
-          <Menu open={open} setOpen={setOpen} />
+          <Menu open={open} setOpen={setOpen} user={user}/>
           <PageHeader user={user} open={open} setOpen={setOpen} />
         </div>
         <Switch>

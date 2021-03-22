@@ -3,7 +3,7 @@ import { bool } from 'prop-types';
 import { StyledMenu } from './Menu.styled';
 import { Link } from 'react-router-dom';
 
-const Menu = ({ open, setOpen }) => {
+const Menu = ({ open, setOpen, user }) => {
   return (
     <StyledMenu open={open}>
       <Link to="/" onClick={() => setOpen(false)}>
@@ -36,6 +36,14 @@ const Menu = ({ open, setOpen }) => {
         </span>
         Rules
       </Link>
+      {user ? 
+        user.admin ? 
+          <Link to="/admin" onClick={() => setOpen(false)}>
+            <span role="img" aria-label="admin">
+              &#x1f4e9;
+            </span>
+            Admin
+          </Link> : <React.Fragment/> : <React.Fragment/>}
     </StyledMenu>
   );
 };
