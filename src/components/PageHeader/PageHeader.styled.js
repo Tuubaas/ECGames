@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledPageHeader = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #303030;
+  background-color: ${({ theme }) => theme.primaryGreen};;
   height: 10%;
 
   .PageHeader-Escape {
@@ -27,5 +27,6 @@ export const StyledPageHeader = styled.div`
     display: flex;
     align-items: center;
     width: 0;
+    
   }
 `;
