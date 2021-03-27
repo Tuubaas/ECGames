@@ -17,5 +17,9 @@ export const GlobalStyle = createGlobalStyle`
         height: 100vh;
         justify-content: center;
         text-rendering: optimizeLegibility;
+
+        button {
+            font-family: 'Open Sans', sans-serif;
+        }
     }
 `;

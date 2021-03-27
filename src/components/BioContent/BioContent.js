@@ -6,11 +6,8 @@ const BioContent = ({user}) => {
 
     if(user){
         return (<StyledBioContent >
+            <div className="StyledBio-text">{user.name}</div>
             <UserPhoto className="StyledBio-image" src={user.photoURL} alt={user.name} size="L"/>
-            <div className="StyledBio-group">
-                <div className="StyledBio-text">{user.name}</div>
-                <div className="StyledBio-text StyledBio-bal">{'Balance: ' + user.balance}</div>
-            </div>
         </StyledBioContent>)}
     else{
         return <div/>
