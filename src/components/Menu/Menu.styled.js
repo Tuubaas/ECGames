@@ -3,11 +3,11 @@ import styled from 'styled-components';
 export const StyledMenu = styled.nav`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  background: ${({ theme }) => theme.primaryLight};
+  //justify-content: center;
+  //background: ${({ theme }) => theme.secondaryGreen};
   height: 100vh;
   text-align: left;
-  padding: 2rem;
+  padding: 12% 0rem 0rem 0rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -18,15 +18,32 @@ export const StyledMenu = styled.nav`
     width: 100%;
   }
 
+  .Menu-Separator {
+    height: 10%;
+    background-color: ${({theme}) => theme.secondaryGreen};
+    box-shadow: inset 0px 3px 3px lightgrey;
+  }
+
+  .Menu-Fill {
+    flex: 1;
+    background-color: ${({theme}) => theme.secondaryGreen};
+  }
+
   a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
     font-size: 2rem;
     text-transform: uppercase;
-    padding: 2rem 0;
     font-weight: bold;
     letter-spacing: 0.5rem;
     color: ${({ theme }) => theme.primaryDark};
     text-decoration: none;
     transition: color 0.3s linear;
+    background-color: ${({theme}) => theme.primaryLight};
+    box-shadow: inset 0px 3px 3px lightgrey;
+    text-align: center;
 
     @media (max-width: ${({ theme }) => theme.mobile}) {
       font-size: 1.5rem;
