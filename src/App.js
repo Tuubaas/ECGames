@@ -51,26 +51,28 @@ function App() {
           <Menu open={open} setOpen={setOpen} user={user}/>
           <PageHeader user={user} open={open} setOpen={setOpen} />
         </div>
-        <Switch>
-          <Route exact path="/">
-            <HomeContent user={user} />
-          </Route>
-          <Route exact path="/dashboard">
-            <Dashboard user={user} />
-          </Route>
-          <Route exact path="/game">
-            <GamePage user={user} />
-          </Route>
-          <Route exact path="/leagues">
-            <LeaguesPage user={user} />
-          </Route>
-          <Route exact path="/about">
-            <HowToPlay user={user} />
-          </Route>
-          <Route exact path="/admin">
-            <AdminPage user={user} />
-          </Route>
-        </Switch>
+        <div style={{height:'auto', width:'auto'}}>
+          <Switch>
+            <Route exact path="/">
+              <HomeContent user={user} />
+            </Route>
+            <Route exact path="/dashboard">
+              <Dashboard user={user} />
+            </Route>
+            <Route exact path="/game">
+              <GamePage user={user} />
+            </Route>
+            <Route exact path="/leagues">
+              <LeaguesPage user={user} />
+            </Route>
+            <Route exact path="/about">
+              <HowToPlay user={user} />
+            </Route>
+            <Route exact path="/admin">
+              <AdminPage user={user} />
+            </Route>
+          </Switch>
+        </div>
       </Router>
     </ThemeProvider>
   );

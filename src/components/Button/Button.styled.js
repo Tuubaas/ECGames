@@ -1,28 +1,21 @@
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const StyledButton = styled.button.attrs(props => ({
   type: props.type
 }))`
   :hover {
-    color: blue;
-    border: 1px solid blue;
+    border: 1px solid ${({theme}) => theme.primaryLight};
   }
 
-  display: flex;
-  height: ${({ main, signIn }) => (main ? '15%' : signIn ? '100%' : '30%')};
-  width: 80%;
-  color: black;
-  background-color: ${({ main, signIn }) =>
-    main || signIn ? 'white' : 'grey'};
-  font-size: ${({ main }) => (main ? '28px' : '14px')};
-  border: 1px solid black;
+  height: 38px;
+  background-color: ${({theme}) => theme.primaryDark};
+  border: none;
+  border-radius: 5px;
+  margin: 8px 16px;
+  color: ${({theme}) => theme.primaryLight};
+  font-size: 18px;
   text-align: center;
-  border-radius: ${({ main }) => (main ? '20px' : '5px')};
-  text-decoration: ${({ main }) => (main ? 'none' : 'initial')};
-  margin: ${({ main }) => (main ? 'auto' : 'unset')};
-  justify-content: center;
-  align-items: center;
 `;
 
 export const StyledLink = styled(Link)`

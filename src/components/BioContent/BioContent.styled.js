@@ -3,9 +3,15 @@ import styled from 'styled-components';
 export const StyledBioContent = styled.div`
     display: flex;
     height: 100%;
-    flex-direction: row;
-    padding: 24px 48px 0px 48px;
+    flex-direction: column;
+    padding: 24px 48px 24px 48px;
     border-right: 1px solid #0D0C1D;
+    //justify-content: center;
+    align-items: center;
+
+    @media (max-width: 786px){
+        border-right: none;
+    }
 
 
     .StyledBio-group {
