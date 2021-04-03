@@ -4,5 +4,6 @@ export const theme = {
   teriaryGreen: '#65CCB8',
   primaryDark: '#182628',
   primaryLight: '#F2F2F2',
+  primaryDisable: '#C6C6C6',
   mobile: '576px'
 };

@@ -7,7 +7,7 @@ export const StyledMenu = styled.nav`
   //background: ${({ theme }) => theme.secondaryGreen};
   height: 100vh;
   text-align: left;
-  padding: 12% 0rem 0rem 0rem;
+  padding: 64px 0rem 0rem 0rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -41,7 +41,7 @@ export const StyledMenu = styled.nav`
     color: ${({ theme }) => theme.primaryDark};
     text-decoration: none;
     transition: color 0.3s linear;
-    background-color: ${({theme}) => theme.primaryLight};
+    background-color: ${({theme, user}) => user ? theme.primaryLight : theme.primaryDisable};
     box-shadow: inset 0px 3px 3px lightgrey;
     text-align: center;
 
