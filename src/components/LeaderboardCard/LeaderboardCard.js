@@ -3,7 +3,6 @@ import { Button } from '..';
 import { StyledLeaderboardCard } from './LeaderboardCard.styled';
 
 const LeaderboardCard = ({league}) => {
-  console.log(league);
   return (<StyledLeaderboardCard>
     <div className="LeaderboardCard-Title">{league.name}</div>
     <div className="LeaderboardCard-Info">
