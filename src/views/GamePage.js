@@ -56,6 +56,10 @@ const GamePage = ({ user }) => {
   const node = useRef();
   useOnClickOutside(node, () => setShow(false));
 
+  console.log(moment(moment()).isAfter(moment(date).add(12, 'h')));
+
+
+
   return (
     <div>
       <div ref={node} style={{marginBottom: "2%"}}>
@@ -64,7 +68,7 @@ const GamePage = ({ user }) => {
           <DatePicker setDate={setDate} setLoading={setLoading}/>
         </ActionWrapper>
       </div>
-      <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent:"center", marginBottom:"2%"}}>
+      <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent:"center", marginBottom:"2%", pointerEvents: moment(moment()).isAfter(moment(date).add(12, 'h')) ? 'none' : 'auto', opacity: moment(moment()).isAfter(moment(date).add(12, 'h')) ? "0.4" : "1"}}>
         {!loading ? bets == null ? <div/> : bets.bets.map((bet, i) => {
           return(
             getBet(bet, i)
