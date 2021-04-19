@@ -1,21 +1,21 @@
-import React, { useState, useRef, useEffect } from 'react';
-
-import { ThemeProvider } from 'styled-components';
-
+import React, { useEffect, useRef, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { PageHeader, HomeContent, Menu } from './components';
-import {
-  GamePage,
-  Dashboard,
-  LeaguesPage,
-  HowToPlay,
-  AdminPage,
-  CreateLeague
-} from './views';
-import { createUser, getUser, firebaseAppAuth } from './FirebaseConfig';
+import { ThemeProvider } from 'styled-components';
+import { HomeContent, Menu, PageHeader } from './components';
+import { createUser, firebaseAppAuth, getUser } from './FirebaseConfig';
 import { GlobalStyle } from './global';
-import { theme } from './theme';
 import { useOnClickOutside } from './hooks';
+import { theme } from './theme';
+import {
+  AdminPage, Dashboard, GamePage,
+
+
+  HowToPlay,
+
+  LeaguePage, LeaguesPage
+} from './views';
+
+
 
 
 function App() {
@@ -65,6 +65,8 @@ function App() {
             <Route exact path="/leagues">
               <LeaguesPage user={user} />
             </Route>
+            <Route exact path="/leagues/:leagueId" render={(props) => (<LeaguePage leagueId={props.match.params.leagueId} user={user}/>)} />
+            <Route exact path="/leagues/:leagueId/bet" render={(props) => (<GamePage leagueId={props.match.params.leagueId} user={user}/>)} />
             <Route exact path="/about">
               <HowToPlay user={user} />
             </Route>

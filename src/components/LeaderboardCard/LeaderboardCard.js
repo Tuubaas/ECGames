@@ -9,7 +9,7 @@ const LeaderboardCard = ({league}) => {
       <div className="LeaderboardCard-IconText"><div>&#x1f3c6;</div><div>PLACING</div></div>
       <div className="LeaderboardCard-IconText"><div>ICON</div><div>CHANGE</div></div>
     </div>
-    <Button type="button">Go To League </Button>
+    <Button link={`/leagues/${league.id}`}>Go To League </Button>
   </StyledLeaderboardCard>)
 }
 

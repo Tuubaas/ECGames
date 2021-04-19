@@ -78,13 +78,13 @@ export const getBets = (date) => {
   return firestore.collection(COLLECTIONS.BETS).doc(date).get();
 }
 
-export const getUserbets = (userId, date) => {
-  return firestore.collection(COLLECTIONS.USERS).doc(userId).collection(COLLECTIONS.BETS).doc(date).get();
+export const getUserbets = (userId, leagueId, date) => {
+  return firestore.collection(COLLECTIONS.LEAGUES).doc(leagueId).collection(COLLECTIONS.USERS).doc(userId).collection(COLLECTIONS.BETS).doc(date).get();
 }
 
-export const getWeekUserbets = () => {
-  return firestore.collection(COLLECTIONS.USERS).get();
-}
+// export const getWeekUserbets = () => {
+//   return firestore.collection(COLLECTIONS.USERS).get();
+// }
 
 export const getLeague = (leagueId) => {
   return firestore.collection(COLLECTIONS.LEAGUES).doc(leagueId).get();
@@ -102,7 +102,6 @@ export const createUser = (id, name, email, photoURL) => {
     name: name,
     email: email,
     photoURL: photoURL,
-    balance: 10000,
     leagues: []
   })
 }
@@ -111,8 +110,9 @@ export const setBets = (date, bets) => {
   return firestore.collection(COLLECTIONS.BETS).doc(date).set({...bets})
 }
 
-export const setUbets = (userId, date, bets) => {
-  return firestore.collection(COLLECTIONS.USERS).doc(userId).collection(COLLECTIONS.BETS).doc(date).set({
+export const setUbets = (userId, leagueId, date, bets) => {
+  console.log(userId, leagueId, date, bets);
+  return firestore.collection(COLLECTIONS.LEAGUES).doc(leagueId).collection(COLLECTIONS.USERS).doc(userId).collection(COLLECTIONS.BETS).doc(date).set({
     ...bets
   })
 }
@@ -122,11 +122,16 @@ export const createLeague = (userId, leagueName) => {
   firestore.collection(COLLECTIONS.USERS).doc(userId).update({
     leagues: app.firestore.FieldValue.arrayUnion(leagueId)
   })
-  return firestore.collection(COLLECTIONS.LEAGUES).doc(leagueId).set({
+
+  firestore.collection(COLLECTIONS.LEAGUES).doc(leagueId).collection(COLLECTIONS.USERS).doc(userId).set({
+    userId: userId,
+    balance: 10000,
+  })
+
+  firestore.collection(COLLECTIONS.LEAGUES).doc(leagueId).set({
     id: leagueId,
     name: leagueName,
     owner: userId,
-    players: [userId]
   })
 }
 
@@ -137,14 +142,9 @@ const createRandomId = () => {
 }
 
 export const joinLeague = (userId, leagueId) => {
-  const leagueRef = firestore.collection(COLLECTIONS.LEAGUES).doc(leagueId)
-  const userRef = firestore.collection(COLLECTIONS.USERS).doc(userId)
-
-  leagueRef.update({
-    players: app.firestore.FieldValue.arrayUnion(userId)
-  })
-
-  userRef.update({
+  firestore.collection(COLLECTIONS.LEAGUES).doc(leagueId).collection(COLLECTIONS.USERS).doc(userId).set({userId: userId, balance: 10000})
+  firestore.collection(COLLECTIONS.USERS).doc(userId).update({
     leagues: app.firestore.FieldValue.arrayUnion(leagueId)
   })
+
 }

@@ -13,7 +13,7 @@ import { getBets, getUserbets, setUbets } from '../FirebaseConfig';
 import { useOnClickOutside } from '../hooks';
 
 
-const GamePage = ({ user }) => {
+const GamePage = ({ leagueId, user }) => {
   const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
   const [userbets, setUserBets] = useState({})
   const [bets, setBets] = useState(null)
@@ -31,9 +31,9 @@ const GamePage = ({ user }) => {
 
   useEffect(() => {
     if(user){
-      getUserbets(user.id, date).then(res => {res.data() && setUserBets(res.data())})
+      getUserbets(user.id, leagueId, date).then(res => {res.data() && setUserBets(res.data())})
     }
-  }, [user, date])
+  }, [user, leagueId, date])
 
   const getBet = (bet, key) => {
     switch(bet.type){
@@ -48,17 +48,12 @@ const GamePage = ({ user }) => {
 
   const sendUserBets = () => {
     console.log(userbets);
-    setUbets(user.id, date, userbets)
+    setUbets(user.id, leagueId, date, userbets)
   }
-
 
   const [show, setShow] = useState(false);
   const node = useRef();
   useOnClickOutside(node, () => setShow(false));
-
-  console.log(moment(moment()).isAfter(moment(date).add(12, 'h')));
-
-
 
   return (
     <div>

@@ -40,11 +40,10 @@ const LeaguesPage = ({user}) => {
   }
 
 
-
   return (
    <div>
     {user && <NewLeagueHandler user={user} />}
-    {leagues && <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+    {leagues.length > 1 && <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
       {leagues.map(league => {
         return <LeaderboardCard key={league.id} league={league} />
       }
