@@ -1,15 +1,16 @@
-import React, { useEffect, useState, useRef } from 'react';
 import moment from 'moment';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  Bet1X2,
+  ActionWrapper, Bet1X2,
   BetMultiChoice,
-  ActionWrapper,
-  DatePicker,
-  Button, 
+
+
+  Button, DatePicker,
+
   Loader
 } from '../components';
-import { useOnClickOutside } from '../hooks';
 import { getBets, getUserbets, setUbets } from '../FirebaseConfig';
+import { useOnClickOutside } from '../hooks';
 
 
 const GamePage = ({ user }) => {
@@ -37,7 +38,7 @@ const GamePage = ({ user }) => {
   const getBet = (bet, key) => {
     switch(bet.type){
       case '1X2':
-        return <Bet1X2 key={key} bet={bet.text} options={bet.options} id={bet.betID} userBets={userbets} setUserBets={setUserBets} />
+        return <Bet1X2 key={key} bet={bet.text} options={bet.choices} id={bet.betID} userBets={userbets} setUserBets={setUserBets} />
       case 'MULTI':
         return <BetMultiChoice key={key} bet={bet.text} options={bet.choices} id={bet.betID} userBets={userbets} setUserBets={setUserBets} />
       default:
@@ -46,6 +47,7 @@ const GamePage = ({ user }) => {
   }
 
   const sendUserBets = () => {
+    console.log(userbets);
     setUbets(user.id, date, userbets)
   }
 

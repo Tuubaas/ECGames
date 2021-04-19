@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyledBetMultiChoice } from './BetMultiChoice.styled';
 
 const BetMultiChoice = ({ bet, options, id, userBets, setUserBets }) => {
@@ -18,14 +18,15 @@ const BetMultiChoice = ({ bet, options, id, userBets, setUserBets }) => {
       setUserBets({...userBets, [id]:i})
     }
   }
-
+console.log(options);
   return (
     <StyledBetMultiChoice>
-      <span>{bet}</span>
+      <span id="BetMultiChoice-Title">{bet}</span>
       <div className="BetMultiChoice-Wrapper">
         {options.map((option, i) => (
-          <div value={option.choice} key={i} onClick={() => handleClick(i)} className={active === i ? 'BetMultiChoice-Button-Active' : 'BetMultiChoice-Button'}>
-            {option.choice}
+          <div value={option.opt} key={i} onClick={() => handleClick(i)} className={active === i ? 'BetMultiChoice-Button-Active' : 'BetMultiChoice-Button'}>
+            <span>{option.opt}</span>
+            <span>{parseFloat(option.bet).toFixed(2)}</span>
           </div>
         ))}
       </div>

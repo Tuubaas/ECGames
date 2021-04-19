@@ -1,10 +1,9 @@
 import React from 'react';
+import { facebookSignIn, googleSignIn } from '../../FirebaseConfig';
 import { Button, TextParagraph, UserPhoto } from '../index';
 import { StyledHomeContent } from './HomeContent.styled';
-import {googleSignIn, facebookSignIn} from '../../FirebaseConfig'
 
 const HomeContent = ({user}) => {
-console.log();
   return (
     <StyledHomeContent>
       <TextParagraph>{}</TextParagraph>

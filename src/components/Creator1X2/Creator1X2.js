@@ -3,9 +3,9 @@ import { StyledCreator1X2 } from './Creator1X2.styled';
 
 const Creator1X2 = ({ bet, index, handleChange, handleBlur }) => {
   const text = `bets[${index}].text`;
-  const opt1 = `bets[${index}].choices.home`;
-  const optX = `bets[${index}].choices.tie`;
-  const opt2 = `bets[${index}].choices.away`;
+  const opt1 = `bets[${index}].choices['1']`;
+  const optX = `bets[${index}].choices['X']`;
+  const opt2 = `bets[${index}].choices['2']`;
 
   return (
     <StyledCreator1X2>
@@ -22,7 +22,7 @@ const Creator1X2 = ({ bet, index, handleChange, handleBlur }) => {
         <input
           type="text"
           name={opt1}
-          value={bet.choices.home}
+          value={bet.choices['1']}
           onChange={handleChange}
           onBlur={handleBlur}
         />
@@ -30,7 +30,7 @@ const Creator1X2 = ({ bet, index, handleChange, handleBlur }) => {
         <input
           type="text"
           name={optX}
-          value={bet.choices.tie}
+          value={bet.choices['X']}
           onChange={handleChange}
           onBlur={handleBlur}
         />
@@ -38,7 +38,7 @@ const Creator1X2 = ({ bet, index, handleChange, handleBlur }) => {
         <input
           type="text"
           name={opt2}
-          value={bet.choices.away}
+          value={bet.choices['2']}
           onChange={handleChange}
           onBlur={handleBlur}
         />

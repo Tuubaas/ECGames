@@ -1,9 +1,9 @@
+import { FieldArray, Form, Formik } from 'formik';
 import React from 'react';
-import { Formik, Form, FieldArray } from 'formik';
-import CreatorMultiChoice from '../CreatorMultiChoice';
-import Creator1X2 from '../Creator1X2';
-import Button from '../Button';
 import { setBets } from '../../FirebaseConfig';
+import Button from '../Button';
+import Creator1X2 from '../Creator1X2';
+import CreatorMultiChoice from '../CreatorMultiChoice';
 
 const BetCreator = ({ bets, date }) => {
   var nbrBets = bets ? bets.bets.length : 0
@@ -26,7 +26,7 @@ const BetCreator = ({ bets, date }) => {
                 <div>
                   {values.bets.map((bet, i) => (
                     <React.Fragment key={i}>
-                      {bet.type === 'multi' ? (
+                      {bet.type === 'MULTI' ? (
                         <CreatorMultiChoice
                           bet={bet}
                           index={i}
@@ -49,7 +49,7 @@ const BetCreator = ({ bets, date }) => {
                     onClick={() =>
                       push({
                         betID:nbrBets++,
-                        type: 'multi',
+                        type: 'MULTI',
                         text: '',
                         choices: [
                           { bet: '', opt: '' },
@@ -70,7 +70,7 @@ const BetCreator = ({ bets, date }) => {
                         betID:nbrBets++,
                         type: '1X2',
                         text: '',
-                        choices: { home: '', tie: '', away: '' }
+                        choices: { '1': '', 'X': '', '2': '' }
                       })
                     }
                   >

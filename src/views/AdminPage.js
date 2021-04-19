@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
 import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { BetCreator, DatePicker, Loader } from '../components';
 import { getBets } from '../FirebaseConfig';
-import { Redirect } from 'react-router-dom';
 
 
 const AdminPage = ({ user }) => {
   const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
-  const [bets, setBets] = useState({});
+  const [bets, setBets] = useState(undefined);
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -16,6 +16,7 @@ const AdminPage = ({ user }) => {
       setLoading(false)
     })
   }, [date]);
+
 
   return (
     user ?

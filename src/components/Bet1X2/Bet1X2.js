@@ -21,14 +21,15 @@ const Bet1X2 = ({ bet, options, id, userBets, setUserBets }) => {
       setUserBets({...userBets, [id]:key})
     }
   }
-
+  
   return (
     <StyledBet1X2>
-      <span>{bet}</span>
+      <span id="Bet1X2-Title">{bet}</span>
       <div>
         {keys.map(key => {
           return <div value={options[key]} key={key} onClick={() => handleClick(key)} className={active === key ? 'Bet1X2-Button-Active' : 'Bet1X2-Button'}>
-            {options[key]}
+            <span>{key}</span>
+            <span>{parseFloat(options[key]).toFixed(2)}</span>
           </div>
         })}
       </div>

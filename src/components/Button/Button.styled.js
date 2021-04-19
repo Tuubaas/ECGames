@@ -5,7 +5,7 @@ export const StyledButton = styled.button.attrs(props => ({
   type: props.type
 }))`
   :hover {
-    border: 1px solid ${({theme}) => theme.primaryLight};
+    background-color: 1px solid ${({theme}) => theme.primaryLight};
   }
 
   height: 38px;
@@ -16,6 +16,7 @@ export const StyledButton = styled.button.attrs(props => ({
   color: ${({theme}) => theme.primaryLight};
   font-size: 18px;
   text-align: center;
+  cursor: pointer;
 `;
 
 export const StyledLink = styled(Link)`
@@ -37,4 +38,5 @@ export const StyledLink = styled(Link)`
   margin: ${({ main }) => (main ? 'auto' : 'unset')};
   justify-content: ${({ main }) => (main ? 'center' : 'unset')};
   align-items: ${({ main }) => (main ? 'center' : 'unset')};
+  cursor: pointer;
 `;

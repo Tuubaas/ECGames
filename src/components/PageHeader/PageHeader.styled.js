@@ -4,7 +4,7 @@ export const StyledPageHeader = styled.div`
   display: flex;
   flex-direction: row;
   background-color: ${({ theme }) => theme.primaryGreen};;
-  height: 10%;
+  height: 50px;
 
   .PageHeader-Escape {
     display: flex;
