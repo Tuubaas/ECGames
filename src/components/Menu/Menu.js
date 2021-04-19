@@ -28,7 +28,7 @@ const Menu = ({ open, setOpen, user }) => {
         <span role="img" aria-label="contact">
           &#x1f4e9;
         </span>
-        Leaderboards
+        Leagues
       </Link>
       <div className="Menu-Separator"/>
       <Link to="/about" onClick={() => setOpen(false)} style={{zIndex:"7"}}>
