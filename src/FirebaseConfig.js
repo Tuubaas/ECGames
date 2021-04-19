@@ -96,7 +96,7 @@ export const getLeague = (leagueId) => {
  */
 
 export const createUser = (id, name, email, photoURL) => {
-  console.log();
+
   return firestore.collection(COLLECTIONS.USERS).doc(id).set({
     id: id,
     name: name,
@@ -119,7 +119,9 @@ export const setUbets = (userId, date, bets) => {
 
 export const createLeague = (userId, leagueName) => {
   const leagueId = createRandomId() + createRandomId()
-  firestore.collection(COLLECTIONS.USERS).doc(userId).collection(COLLECTIONS.LEAGUES).doc(leagueId).set({id:leagueId})
+  firestore.collection(COLLECTIONS.USERS).doc(userId).update({
+    leagues: app.firestore.FieldValue.arrayUnion(leagueId)
+  })
   return firestore.collection(COLLECTIONS.LEAGUES).doc(leagueId).set({
     id: leagueId,
     name: leagueName,
@@ -132,4 +134,17 @@ const createRandomId = () => {
   return Math.floor((1 + Math.random()) * 0x10000)
       .toString(16)
       .substring(1);
+}
+
+export const joinLeague = (userId, leagueId) => {
+  const leagueRef = firestore.collection(COLLECTIONS.LEAGUES).doc(leagueId)
+  const userRef = firestore.collection(COLLECTIONS.USERS).doc(userId)
+
+  leagueRef.update({
+    players: app.firestore.FieldValue.arrayUnion(userId)
+  })
+
+  userRef.update({
+    leagues: app.firestore.FieldValue.arrayUnion(leagueId)
+  })
 }

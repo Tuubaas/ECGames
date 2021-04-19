@@ -11,14 +11,15 @@ import DashboardBets from './DashboardBets';
 import DashboardContent from './DashboardContent';
 import DashboardLeague from './DashboardLeague';
 import DatePicker from './DatePicker';
-import GlobalLeaderboard from './GlobalLeaderboard'
-import {H1, H2} from './Headers'
+import GlobalLeaderboard from './GlobalLeaderboard';
+import { H1, H2 } from './Headers';
 import HomeContent from './HomeContent';
 import LeaderboardCard from './LeaderboardCard';
 import LeaderboardItem from './LeaderboardItem';
 import Loader from './Loader';
 import Menu from './Menu';
 import MultiChoiceItem from './MultiChoiceItem';
+import NewLeagueHandler from './NewLeagueHandler';
 import PageHeader from './PageHeader';
 import TextParagraph from './TextParagraph';
 import UserPhoto from './UserPhoto';
@@ -38,7 +39,7 @@ export {
   DashboardLeague,
   DatePicker,
   GlobalLeaderboard,
-  H1, 
+  H1,
   H2,
   HomeContent,
   LeaderboardCard,
@@ -46,6 +47,7 @@ export {
   Loader,
   Menu,
   MultiChoiceItem,
+  NewLeagueHandler,
   PageHeader,
   TextParagraph,
   UserPhoto
